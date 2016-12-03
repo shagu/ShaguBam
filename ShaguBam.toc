@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: |cff33ffccShagu|cffffffffBam
+## Author: Eric (Shagu) Mauser, 2016
+## Notes: BamMod
+## Version: 0.1
+## SavedVariables: ShaguBamSettings, ShaguBamRecord
+
+# main
+ShaguBam.lua
