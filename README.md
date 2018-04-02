@@ -4,7 +4,7 @@ Everytime a new crit record has be done, this addon shows up the new record and 
 It can be configured to notify via emotes, group chat, raid chat, say, yell or siltently for the player only.
 By default it will use emotes. To configure, please type: /bam or /shagubam
 
-![preview](http://shagu.org/shagucollection/img/ShaguBam.jpg)
+![screenshot](https://raw.githubusercontent.com/shagu/ShaguAddons/master/_img/ShaguBam/screenshot.jpg)
 
 ## Installation
 1. Download **[Latest Version](https://github.com/shagu/ShaguBam/archive/master.zip)**
