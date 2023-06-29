@@ -1,9 +1,9 @@
 SLASH_SHAGUBAM1, SLASH_SHAGUBAM2, SLASH_SHAGUBAM3 = "/shagubam", "/sb", "/bam"
 SlashCmdList["SHAGUBAM"] = function(message)
-	local cmd = { }
-	for c in string.gfind(message, "[^ ]+") do
-		table.insert(cmd, string.lower(c))
-	end
+  local cmd = { }
+  for c in string.gfind(message, "[^ ]+") do
+    table.insert(cmd, string.lower(c))
+  end
 
   if cmd[1] == "self" then
     ShaguBamSettings = "SELF"
@@ -22,14 +22,16 @@ SlashCmdList["SHAGUBAM"] = function(message)
     DEFAULT_CHAT_FRAME:AddMessage("/bam [self, emote, say, yell, group, raid]")
   end
 
-  if not ShaguBamSettings then 
-    ShaguBamSettings = "EMOTE" 
+  if not ShaguBamSettings then
+    ShaguBamSettings = "EMOTE"
   end
+
   DEFAULT_CHAT_FRAME:AddMessage("-> outut set to '" .. string.lower(ShaguBamSettings) .. "'")
-  
 end
-ShaguBam = CreateFrame("Frame", nil)
+
 ShaguBamRecord = {}
+
+ShaguBam = CreateFrame("Frame", nil)
 ShaguBam:RegisterEvent("CHAT_MSG_SPELL_SELF_DAMAGE");
 ShaguBam:RegisterEvent("CHAT_MSG_COMBAT_SELF_HITS");
 ShaguBam:RegisterEvent("PLAYER_ENTERING_WORLD");
@@ -43,14 +45,15 @@ ShaguBam:SetScript("OnEvent", function ()
     ShaguBamSettings = "EMOTE"
   end
 
-	if event == "PLAYER_ENTERING_WORLD" then
-		if GetLocale() == "deDE" then
-		  ShaguBam.spell = "(.+) trifft (.+) kritisch: (%d+) .+%."
-		  ShaguBam.weapon = "Ihr trefft (.+) kritisch für (%d+) .+%."
-		else
-	  	ShaguBam.spell = "Your (.+) crits (.+) for (%d+)"
-		  ShaguBam.weapon = "You crit (.+) for (%d+)"
-	  end
+  if event == "PLAYER_ENTERING_WORLD" then
+    if GetLocale() == "deDE" then
+      ShaguBam.spell = "(.+) trifft (.+) kritisch: (%d+) .+%."
+      ShaguBam.weapon = "Ihr trefft (.+) kritisch für (%d+) .+%."
+    else
+      ShaguBam.spell = "Your (.+) crits (.+) for (%d+)"
+      ShaguBam.weapon = "You crit (.+) for (%d+)"
+    end
+
     return
   end
 
@@ -58,11 +61,13 @@ ShaguBam:SetScript("OnEvent", function ()
     local damage = tonumber(damage)
     if not ShaguBamRecord[spell] or ShaguBamRecord[spell] < damage then
       ShaguBamRecord[spell] = damage
+
       if ShaguBamSettings == "SELF" then
         DEFAULT_CHAT_FRAME:AddMessage("Bam! " .. spell .. " crit for " .. damage .. "!")
       else
         SendChatMessage("Bam! " .. spell .. " crit for " .. damage .. "!", ShaguBamSettings)
       end
+
       ShaguBam:PlaySound()
     end
   end
@@ -71,11 +76,13 @@ ShaguBam:SetScript("OnEvent", function ()
     local damage = tonumber(damage)
     if not ShaguBamRecord["auto"] or ShaguBamRecord["auto"] < damage then
       ShaguBamRecord["auto"] = damage
+
       if ShaguBamSettings == "SELF" then
         DEFAULT_CHAT_FRAME:AddMessage("Bam! Autohit crit for " .. damage .. "!")
       else
         SendChatMessage("Bam! Autohit crit for " .. damage .. "!", ShaguBamSettings)
       end
+
       ShaguBam:PlaySound()
     end
   end
