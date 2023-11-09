@@ -1,4 +1,30 @@
 SLASH_SHAGUBAM1, SLASH_SHAGUBAM2, SLASH_SHAGUBAM3 = "/shagubam", "/sb", "/bam"
+ShaguBamRecord = {}
+
+function PrintTop(records)
+  local isEmpty = true
+  local sorted = {}
+
+  for k, v in pairs(records) do
+      table.insert(sorted, {k, v})
+  end
+
+  table.sort(sorted, function(a,b) return a[2] > b[2] end)
+
+  DEFAULT_CHAT_FRAME:AddMessage("|cff33ffccShaguBam|r top damage so far:")
+
+  for _, v in ipairs(sorted) do
+      if isEmpty == true then isEmpty = false end
+      local spellName = v[1]
+      if spellName == 'auto' then spellName = 'Auto Attack' end
+      DEFAULT_CHAT_FRAME:AddMessage(spellName .. ": " .. v[2])
+  end
+
+  if isEmpty == true then 
+    DEFAULT_CHAT_FRAME:AddMessage("none")
+  end
+end
+
 SlashCmdList["SHAGUBAM"] = function(message)
   local cmd = { }
   for c in string.gfind(message, "[^ ]+") do
@@ -17,19 +43,21 @@ SlashCmdList["SHAGUBAM"] = function(message)
     ShaguBamSettings = "GROUP"
   elseif cmd[1] == "raid" then
     ShaguBamSettings = "RAID"
+  elseif cmd[1] == "top" then
+    PrintTop(ShaguBamRecord)
   else
     DEFAULT_CHAT_FRAME:AddMessage("|cff33ffccShaguBam|r usage:")
-    DEFAULT_CHAT_FRAME:AddMessage("/bam [self, emote, say, yell, group, raid]")
+    DEFAULT_CHAT_FRAME:AddMessage("/bam [self, emote, say, yell, group, raid, top]")
   end
 
   if not ShaguBamSettings then
     ShaguBamSettings = "EMOTE"
   end
 
-  DEFAULT_CHAT_FRAME:AddMessage("-> output set to '" .. string.lower(ShaguBamSettings) .. "'")
+  if cmd[1] ~= "top" then
+    DEFAULT_CHAT_FRAME:AddMessage("-> output set to '" .. string.lower(ShaguBamSettings) .. "'")
+  end
 end
-
-ShaguBamRecord = {}
 
 ShaguBam = CreateFrame("Frame", nil)
 ShaguBam:RegisterEvent("CHAT_MSG_SPELL_SELF_DAMAGE");
