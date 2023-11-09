@@ -26,7 +26,7 @@ SlashCmdList["SHAGUBAM"] = function(message)
     ShaguBamSettings = "EMOTE"
   end
 
-  DEFAULT_CHAT_FRAME:AddMessage("-> outut set to '" .. string.lower(ShaguBamSettings) .. "'")
+  DEFAULT_CHAT_FRAME:AddMessage("-> output set to '" .. string.lower(ShaguBamSettings) .. "'")
 end
 
 ShaguBamRecord = {}
