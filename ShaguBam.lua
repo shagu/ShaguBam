@@ -1,7 +1,7 @@
 SLASH_SHAGUBAM1, SLASH_SHAGUBAM2, SLASH_SHAGUBAM3 = "/shagubam", "/sb", "/bam"
 ShaguBamRecord = {}
 
-function PrintTop(records)
+local function PrintTop(records)
   local isEmpty = true
   local sorted = {}
 
